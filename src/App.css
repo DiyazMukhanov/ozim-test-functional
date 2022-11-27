@@ -10,14 +10,16 @@ body, html {
 }
 .subscriber {
     margin-left: 10%;
+    /*width: 50px;*/
 }
 .publisher {
     float: right;
     margin-right: 10%;
 }
 .OTPublisherContainer {
-    width: 80vh !important;
-    height: 80vh !important;
+    /*width: 80vh !important;*/
+    /*height: 80vh !important;*/
+    /*margin-left: 5px;*/
 }
 #error {
     color: red;
