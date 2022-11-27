@@ -47,7 +47,7 @@ class SessionRoom extends React.Component {
                         <Subscriber />
                    </OTStreams>
               </OTSession>
-                   <FetchTest />
+
               </div>
           )
      }

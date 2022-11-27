@@ -29,7 +29,6 @@ const Home = () => {
                 navigate('/room', { replace: true }, [navigate]);
             }
             console.log(sessionCtx.sessionData);
-
     }
 
     // useEffect(() => {
@@ -60,8 +59,8 @@ const Home = () => {
         Home
         <FetchTest idOfSession='637df77fe26b434cda5b5ef7'/><br/>
         <button onClick={() => handleRoom('637df77fe26b434cda5b5ef7')}>Chat Room 1</button><br/>
-        <button>Chat Room 2</button><br/>
-        <button>Chat Room 3</button><br/>
+        <button onClick={() => handleRoom('637df797e26b434cda5b5ef9')}>Chat Room 2</button><br/>
+        <button onClick={() => handleRoom('637df804e26b434cda5b5efb')}>Chat Room 3</button><br/>
     </div>
 }
 
