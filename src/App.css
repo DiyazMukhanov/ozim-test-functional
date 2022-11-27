@@ -13,13 +13,14 @@ body, html {
     /*width: 50px;*/
 }
 .publisher {
-    float: right;
-    margin-right: 10%;
+    /*float: right;*/
+    /*margin-right: 10%;*/
 }
 .OTPublisherContainer {
     /*width: 80vh !important;*/
     /*height: 80vh !important;*/
     /*margin-left: 5px;*/
+    width: 20px;
 }
 #error {
     color: red;
