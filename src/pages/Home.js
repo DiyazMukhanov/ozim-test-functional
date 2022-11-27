@@ -2,6 +2,7 @@ import FetchTest from "../components/FetchTest";
 import {useNavigate} from "react-router-dom";
 import SessionContext from "../store/sessionContext";
 import {useCallback, useState, useContext, useEffect} from "react";
+import React from 'react';
 
 
 const Home = () => {
