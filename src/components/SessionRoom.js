@@ -4,44 +4,60 @@ import ConnectionStatus from './ConnectionStatus';
 import Publisher from './Publisher';
 import Subscriber from './Subscriber';
 import React from 'react';
-import FetchTest from "./FetchTest";
+import {useState} from "react";
 
 
-class SessionRoom extends React.Component {
-     constructor(props) {
-          super(props);
-          this.state = {
-               error: null,
-               connected: false
-          };
-          this.sessionEvents = {
-               sessionConnected: () => {
-                    this.setState({ connected: true });
-               },
-               sessionDisconnected: () => {
-                    this.setState({connected: false});
-               }
+// class SessionRoom extends React.Component {
+//      constructor(props) {
+//           super(props);
+//           this.state = {
+//                error: null,
+//                connected: false
+//           };
+//           this.sessionEvents = {
+//                sessionConnected: () => {
+//                     this.setState({ connected: true });
+//                },
+//                sessionDisconnected: () => {
+//                     this.setState({connected: false});
+//                }
+//           }
+//      };
+//
+//      onError = (err) => {
+//           this.setState({ error: `FAiled to connect: ${err.message}` });
+//      }
+
+const SessionRoom = (props) => {
+     const [error, setError] = useState(null);
+     const [connected, setConnected] = useState(false);
+
+
+     const sessionEvents = {
+          sessionConnected: () => {
+               setConnected(true);
+          },
+          sessionDisconnected: () => {
+               setConnected(false);
           }
-     };
+     }
 
-     onError = (err) => {
-          this.setState({ error: `FAiled to connect: ${err.message}` });
+     const onError = (err) => {
+          setError(`Failed to connnect: ${err.message}`);
      }
 
 
-
-     render() {
           return (
               <div>
               <OTSession
-              apiKey={this.props.apiKey}
-              sessionId={this.props.sessionId}
-              token={this.props.token}
-              eventHandlers={this.sessionEvents}
-              onError={this.onError}
+              apiKey={props.apiKey}
+              sessionId={props.sessionId}
+              token={props.token}
+              eventHandlers={sessionEvents}
+              onError={onError}
               >
-                   {this.state.error ? <div id="error">{this.state.error}</div> : null}
-                   <ConnectionStatus connected={this.state.connected}/>
+                   {error ? <div id="error">{error}</div> : null}
+                   <ConnectionStatus connected={connected}/>
                    <Publisher />
                    <OTStreams>
                         <Subscriber />
@@ -50,8 +66,9 @@ class SessionRoom extends React.Component {
 
               </div>
           )
-     }
 }
+
+export default preloadScript(SessionRoom);
 
 
 
@@ -130,4 +147,4 @@ class SessionRoom extends React.Component {
 // }
 
 
-export default preloadScript(SessionRoom);
+

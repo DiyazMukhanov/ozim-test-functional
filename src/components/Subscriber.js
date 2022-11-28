@@ -1,58 +1,57 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { OTSubscriber } from 'opentok-react';
 import CheckBox from './CheckBox';
 
-class Subscriber extends React.Component {
-    constructor(props) {
-        super(props);
+const Subscriber = () => {
+    const [error, setError] = useState(null);
+    const [audio, setAudio] = useState(true);
+    const [video, setVideo] = useState(true);
+    // const [videoSource, setVideoSource] = useState('camera');
 
-        this.state = {
-            error: null,
-            audio: true,
-            video: true
-        };
+    const settingAudio = (audio) => {
+        setAudio(audio);
     }
 
-    setAudio = (audio) => {
-        this.setState({ audio });
+    const settingVideo = (video) => {
+        setVideo(video);
     }
 
-    setVideo = (video) => {
-        this.setState({ video });
+    // const changeVideoSource = () => {
+    //     videoSource !== 'camera' ? setVideoSource('camera') : setVideoSource('screen');
+    // }
+
+    const onError = (err) => {
+        setError(`Failed to publish: ${err.message}`);
     }
 
-    onError = (err) => {
-        this.setState({ error: `Failed to subscribe: ${err.message}` });
-    }
-
-    render() {
-        return (
-            <div className="subscriber">
-                Subscriber
-                {this.state.error ? <div id="error">{this.state.error}</div> : null}
-                <OTSubscriber
-                    properties={{
-                        subscribeToAudio: this.state.audio,
-                        subscribeToVideo: this.state.video
-                    }}
-                    onError={this.onError}
-                />
-                <CheckBox
-                    label="Share Screen"
-                    onChange={this.changeVideoSource}
-                />
-                <CheckBox
-                    label="Publish Audio"
-                    initialChecked={this.state.audio}
-                    onChange={this.setAudio}
-                />
-                <CheckBox
-                    label="Publish Video"
-                    initialChecked={this.state.video}
-                    onChange={this.setVideo}
-                />
-            </div>
-        );
-    }
+    return (
+        <div className="subscriber">
+            Subscriber
+            {error ? <div id="error">{error}</div> : null}
+            <OTSubscriber
+                properties={{
+                    subscribeToAudio: audio,
+                    subscribeToVideo: video
+                }}
+                onError={onError}
+            />
+            {/*<CheckBox*/}
+            {/*    label="Share Screen"*/}
+            {/*    onChange={changeVideoSource}*/}
+            {/*/>*/}
+            <CheckBox
+                label="Publish Audio"
+                initialChecked={audio}
+                onChange={setAudio}
+            />
+            <CheckBox
+                label="Publish Video"
+                initialChecked={video}
+                onChange={setVideo}
+            />
+        </div>
+    );
 }
+
+
 export default Subscriber;

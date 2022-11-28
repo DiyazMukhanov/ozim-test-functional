@@ -10,6 +10,7 @@ body, html {
 }
 .subscriber {
     margin-left: 10%;
+    margin-top: 20px;
     /*width: 50px;*/
 }
 .publisher {
